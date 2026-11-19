@@ -1,0 +1,37 @@
+# Normalise line endings.
+#
+# Without this, a checkout on Windows gives the shell scripts CRLF endings, and
+# a CRLF shell script fails on Linux with "bad interpreter: No such file or
+# directory" — which is how a CI runner reports a problem that has nothing to
+# do with the code.
+*               text=auto
+
+# Always LF, whatever the platform: these are executed by an interpreter that
+# does not forgive a carriage return.
+*.sh            text eol=lf
+*.php           text eol=lf
+*.sql           text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+tests/hooks/*   text eol=lf
+
+# Windows-only, and cmd.exe wants CRLF.
+*.bat           text eol=crlf
+
+# Never touched.
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.pdf           binary
+*.woff          binary
+*.woff2         binary
+*.gz            binary
+
+# Keep these out of release archives; they are the test estate and the
+# working notes, not the application.
+/tests          export-ignore
+/.github        export-ignore
+/.gitattributes export-ignore
+/.gitignore     export-ignore

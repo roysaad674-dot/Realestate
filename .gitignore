@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------- secrets
+# The real configuration never goes in. .env.example is the template, and it
+# carries keys with empty values so a new environment knows what to fill in.
+.env
+.env.local
+.env.*.local
+
+# ------------------------------------------------------------ runtime state
+# Written by the application as it runs. None of it belongs to a commit, and
+# the log in particular can hold request details.
+storage/logs/*.log
+storage/cache/*
+storage/sessions/*
+storage/uploads/*
+
+# Keep the directories themselves, so a fresh checkout has somewhere to write.
+!storage/logs/.gitkeep
+!storage/cache/.gitkeep
+!storage/uploads/.gitkeep
+
+# ------------------------------------------------------------- test state
+# Each suite writes the ids it created so its cleanup script can find them
+# again. They last one run.
+tests/.e2e-*-state
+
+# ------------------------------------------------------------------ backups
+*.bak
+*.orig
+*.rej
+*~
+
+# ------------------------------------------------------------- environment
+# Editor and operating system droppings.
+.vscode/
+.idea/
+*.sublime-*
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---------------------------------------------------------------- database
+# Dumps taken before a migration (see ROLLBACK.md). They are backups, not
+# source, and they hold real data.
+*.sql.gz
+backups/
